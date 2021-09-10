@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
 } from '@nestjs/common';
 import PostsService from './posts.service';
 import CreatePostDto from './dto/createPost.dto';
@@ -21,8 +21,8 @@ export default class PostsController {
   }
 
   @Get(':id')
-  getPostsById(@Param('id') id: string) {
-    return this.postsService.getPostsById(Number(id));
+  getPostById(@Param('id') id: string) {
+    return this.postsService.getPostById(Number(id));
   }
 
   @Post()
@@ -30,8 +30,8 @@ export default class PostsController {
     return this.postsService.createPost(post);
   }
 
-  @Put(':id')
-  async replacePost(@Param('id') id: string, @Body() post: UpdatePostDto) {
+  @Patch(':id')
+  async updatePost(@Param('id') id: string, @Body() post: UpdatePostDto) {
     return this.postsService.updatePost(Number(id), post);
   }
 
