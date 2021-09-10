@@ -1,0 +1,17 @@
+version: "3"
+services:
+  postgres_nestjs:
+    container_name: postgres_nestjs
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5433:5432"
+    env_file:
+      - docker.env
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    networks:
+      - postgres_nestjs
+networks:
+  postgres_nestjs:
+    driver: bridge
