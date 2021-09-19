@@ -10,6 +10,11 @@ import * as createRedisStore from 'connect-redis';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors({
+    origin: 'http://localhost:5000',
+    credentials: true,
+  });
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -32,7 +37,6 @@ async function bootstrap() {
       saveUninitialized: false,
     }),
   );
-
   app.use(passport.initialize());
   app.use(passport.session());
 
